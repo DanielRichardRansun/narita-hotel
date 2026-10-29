@@ -401,18 +401,18 @@ main {
 }
 
 .main-nav-bar .nav-link .nav-link-click::before {
-   content:"";
+   content: "";
    position: absolute;
-   top: 86%;
+   bottom: 6px;
    left: 50%;
-   transform: translate(-50%, 100%) scaleX(0.3) rotate(0.001deg);
+   transform: translateX(-50%) scale(0);
    opacity: 0;
-   width: 22px;
-   height: 2.5px;
-   background: linear-gradient(90deg, #903C02 0%, #C5A059 50%, #903C02 100%);
-   box-shadow: 0 1px 4px rgba(144, 60, 2, 0.35);
-   border-radius: 2px;
-   transition: transform var(--animation-primary), opacity var(--animation-primary), background var(--animation-nav);
+   width: 4.5px;
+   height: 4.5px;
+   background-color: var(--color-dark);
+   box-shadow: none;
+   border-radius: 50%;
+   transition: transform var(--animation-primary), opacity var(--animation-primary), background-color var(--animation-nav);
    pointer-events: none;
 }
 
@@ -459,32 +459,32 @@ main {
 
 /* Active navigation link styling */
 .main-nav-bar .nav-link[data-link-status="active"] .nav-link-click::before {
-   transform: translate(-50%, -50%) scaleX(1) rotate(0.001deg);
+   transform: translateX(-50%) scale(1);
    opacity: 1;
 }
 
 .main-nav-bar .nav-link[data-link-status="active"] .nav-link-click span {
-   font-weight: 600;
-   color: #8C5824;
+   font-weight: 500;
+   color: var(--color-dark);
 }
 
 @media (hover: hover) { 
    @media screen and (min-width: 1240px) {
 
-      .main-nav-bar .nav-link-ul:hover .nav-link .nav-link-click::before {
-         transform: translate(-50%, 100%) scaleX(0.3) rotate(0.001deg);
+      .main-nav-bar .nav-link-ul:hover .nav-link:not([data-link-status="active"]) .nav-link-click::before {
+         transform: translateX(-50%) scale(0);
          opacity: 0;
       }
 
-      /* Keep active link indicator gracefully visible while hovering siblings */
+      /* Keep active link dot visible while hovering siblings */
       .main-nav-bar .nav-link-ul:hover .nav-link[data-link-status="active"] .nav-link-click::before {
-         transform: translate(-50%, -50%) scaleX(0.8) rotate(0.001deg);
-         opacity: 0.7;
+         transform: translateX(-50%) scale(1);
+         opacity: 1;
       }
 
-      .main-nav-bar .nav-link-ul .nav-link .nav-link-click:hover::before {
-         transform: translate(-50%, -50%) scaleX(1) rotate(0.001deg) !important;
-         opacity: 1 !important;
+      .main-nav-bar .nav-link-ul .nav-link:not([data-link-status="active"]) .nav-link-click:hover::before {
+         transform: translateX(-50%) scale(0.8) !important;
+         opacity: 0.45 !important;
       }
 
    }
@@ -648,7 +648,7 @@ main {
 [data-scrolling-started="true"][data-theme-nav="dark"][data-bg-nav="transparent"][data-page-transition="not-active"] .main-nav-bar .nav-link[data-link-status="active"] .nav-link-click span,
 [data-bg-nav="transparent"] .main-nav-bar .nav-link[data-link-status="active"] .nav-link-click span {
    color: #FFFFFF !important;
-   font-weight: 600;
+   font-weight: 500;
    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
 }
 
@@ -677,8 +677,8 @@ main {
 [data-scrolling-started="true"]:not([data-bg-nav="transparent"]) .main-nav-bar .nav-link[data-link-status="active"] .nav-link-click span,
 [data-bg-nav="solid"] .main-nav-bar .nav-link[data-link-status="active"] .nav-link-click span,
 [data-theme-nav="light"]:not([data-bg-nav="transparent"]) .main-nav-bar .nav-link[data-link-status="active"] .nav-link-click span {
-   color: #8C5824 !important;
-   font-weight: 600;
+   color: var(--color-dark) !important;
+   font-weight: 500;
 }
 
 @media (hover: hover) { 
@@ -708,15 +708,17 @@ main {
 [data-scrolling-started="false"][data-theme-nav="dark"][data-page-transition="not-active"] .main-nav-bar .nav-link .nav-link-click::before,
 [data-scrolling-started="true"][data-theme-nav="dark"][data-bg-nav="transparent"][data-page-transition="not-active"] .main-nav-bar .nav-link .nav-link-click::before,
 [data-bg-nav="transparent"] .main-nav-bar .nav-link .nav-link-click::before {
-   background: linear-gradient(90deg, #F5D77F 0%, #D4AF37 50%, #F5D77F 100%) !important;
-   box-shadow: 0 0 8px rgba(212, 175, 55, 0.8), 0 0 2px rgba(255, 255, 255, 0.9) !important;
+   background: #FFFFFF !important;
+   background-color: #FFFFFF !important;
+   box-shadow: none !important;
 }
 
 [data-scrolling-started="true"]:not([data-bg-nav="transparent"]) .main-nav-bar .nav-link .nav-link-click::before,
 [data-bg-nav="solid"] .main-nav-bar .nav-link .nav-link-click::before,
 [data-theme-nav="light"]:not([data-bg-nav="transparent"]) .main-nav-bar .nav-link .nav-link-click::before {
-   background: linear-gradient(90deg, #903C02 0%, #C5A059 50%, #903C02 100%) !important;
-   box-shadow: 0 1px 4px rgba(144, 60, 2, 0.35) !important;
+   background: var(--color-dark) !important;
+   background-color: var(--color-dark) !important;
+   box-shadow: none !important;
 }
 
 [data-scrolling-started="false"][data-theme-nav="dark"][data-page-transition="not-active"] .main-nav-bar .nav-link .dots .dot,
@@ -866,14 +868,14 @@ main {
 
 .side-nav .row-links-primary ul .nav-link[data-link-status="active"] span,
 .section-footer .col-links-primary ul .nav-link[data-link-status="active"] span {
-   color: #8C5824 !important;
-   font-weight: 600;
+   color: var(--color-dark) !important;
+   font-weight: 500;
 }
 
 .side-nav .row-links-secondary .link[data-link-status="active"] span,
 .section-footer .col-links-secondary .link[data-link-status="active"] span {
-   color: #8C5824 !important;
-   font-weight: 600;
+   color: var(--color-dark) !important;
+   font-weight: 500;
 }
 
 .side-nav .row-links-primary .nav-link-click::before,
@@ -881,13 +883,13 @@ main {
    content: "";
    position: absolute;
    top: 50%;
-   right: 0;
+   right: -10px;
    opacity: 0;
-   transform: translate(100%, -50%) rotate(0.001deg);
-   width: 8px;
-   height: 8px;
-   background: linear-gradient(135deg, #903C02, #D4AF37);
-   box-shadow: 0 0 6px rgba(144, 60, 2, 0.4);
+   transform: translate(0, -50%) scale(0);
+   width: 5px;
+   height: 5px;
+   background: var(--color-dark);
+   box-shadow: none;
    border-radius: 50%;
    transition: transform var(--animation-primary), opacity var(--animation-primary), background-color var(--animation-nav);
    pointer-events: none;
@@ -895,7 +897,7 @@ main {
 
 .side-nav .row-links-primary .nav-link[data-link-status="active"] .nav-link-click::before,
 .section-footer .col-links-primary .nav-link[data-link-status="active"] .nav-link-click::before {
-   transform: translate(0%, -50%) rotate(0.001deg);
+   transform: translate(0, -50%) scale(1);
    opacity: 1;
 }
 
