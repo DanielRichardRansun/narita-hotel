@@ -41,8 +41,8 @@ function waitForFonts(callback) {
    }
 }
 
-// Animation - Page Loader
-function initLoaderHome() {
+// Animation - Page Loader (Home & All Pages)
+function initLoader() {
 
    const windowWidth = window.innerWidth;
 
@@ -58,6 +58,13 @@ function initLoaderHome() {
    const offsetNegative = `${50 + offset}%`;
 
    const tl = gsap.timeline();
+
+   // Target the header element on the current page (every page has .default-header or .section-home-header)
+   const headerSelector = document.querySelector(".section-home-header") 
+      ? ".section-home-header" 
+      : ".default-header";
+
+   const hasHeaderMedia = !!document.querySelector(`${headerSelector} .background-media, ${headerSelector} figure, ${headerSelector} img`);
 
    tl.set("html", {
       cursor: "wait"
@@ -88,7 +95,7 @@ function initLoaderHome() {
       autoAlpha: 0
    }, 0);
 
-   tl.set(".section.section-home-header", {
+   tl.set(`.section${headerSelector}`, {
       autoAlpha: 1
    }, 0.8);
 
@@ -96,16 +103,18 @@ function initLoaderHome() {
       autoAlpha: 1
    }, 0.8);
 
-   tl.set(".section-home-header .background-media", {
-      scale: 1,
-      rotate: 0.001
-   }, 0);
+   if (hasHeaderMedia) {
+      tl.set(`${headerSelector} .background-media`, {
+         scale: 1,
+         rotate: 0.001
+      }, 0);
+   }
 
    tl.set(".loading-container .loading-screen", {
       backgroundColor: "transparent"
    }, 0);
 
-   tl.set(".section-home-header", {
+   tl.set(headerSelector, {
       clipPath: `polygon(${offsetPositive} ${offsetTop}, ${offsetNegative} ${offsetTop}, ${offsetNegative} 100%, ${offsetPositive} 100%)`
    }, 0);
 
@@ -114,7 +123,7 @@ function initLoaderHome() {
       rotate: 0.001
    }, 0);
 
-   tl.from(".section-home-header", {
+   tl.from(headerSelector, {
       yPercent: 50,
       rotate: 0.001,
       duration: 2,
@@ -128,7 +137,7 @@ function initLoaderHome() {
       ease: "expo.inOut"
    }, 0);
 
-   tl.to(".section-home-header", {
+   tl.to(headerSelector, {
       duration: 2,
       ease: "expo.inOut",
       clipPath: "polygon(-1% -1%, 101% -1%, 101% 101%, -1% 101%)",
@@ -153,13 +162,15 @@ function initLoaderHome() {
       autoAlpha: 0
    }, 3.8);
 
-   tl.to(".section-home-header .background-media", {
-      duration: 2,
-      ease: "expo.inOut",
-      scale: 1,
-      rotate: 0.001,
-      clearProps: "all"
-   }, 1.8);
+   if (hasHeaderMedia) {
+      tl.to(`${headerSelector} .background-media`, {
+         duration: 2,
+         ease: "expo.inOut",
+         scale: 1,
+         rotate: 0.001,
+         clearProps: "all"
+      }, 1.8);
+   }
 
    tl.to(".loading-logo", {
       opacity: 0,
@@ -167,7 +178,7 @@ function initLoaderHome() {
       ease: "expo.inOut"
    }, 2.6);
 
-   tl.from(".section-home-header .container", {
+   tl.from(`${headerSelector} .container`, {
       duration: 2,
       ease: "expo.out",
       yPercent: 10,
@@ -191,59 +202,8 @@ function initLoaderHome() {
    }, null, 2.4);
 }
 
-// Animation - Page Loader
-function initLoader() { 
-
-   var tl = gsap.timeline();
-
-   tl.set("html", { 
-      cursor: "wait"
-   });
-
-   tl.set("main", {
-      height: "100svh",
-      overflow: "clip"
-   });
-
-   tl.to(".loading-screen", {
-      duration: .8,
-      autoAlpha: 0,
-      ease: "animation-nav"
-   }, 1);
-
-   tl.to(".loading-logo svg", {
-      yPercent: -100,
-      rotate: 0.001,
-      duration: 1.2,
-      ease: "Expo.easeInOut",
-   }, 0.2);
-
-   tl.set("html", { 
-      cursor: "auto",
-   });
-
-   tl.set(".transition-screen", {
-      autoAlpha: 1
-   }, 0);
-
-   tl.to(".transition-screen", {
-      duration: .8,
-      autoAlpha: 0,
-      ease: "animation-nav"
-   }, 0.1);
-
-   tl.call(function() {
-      scroll.stop();
-   }, null, 0);
-
-   tl.call(function() {
-      initMews();
-   }, null, 0.1);
-
-   tl.call(function() {
-      pageTransitionOut();
-   }, null, 0.7);
-
+function initLoaderHome() {
+   initLoader();
 }
 
 // Animation - Page Leave
