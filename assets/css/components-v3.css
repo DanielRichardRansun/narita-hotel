@@ -39,13 +39,18 @@
 
 .default-image-header .overlay-dark-gradient {   
    background: linear-gradient(180deg, 
-      rgba(8, 6, 4, 0.78) 0%, 
-      rgba(8, 6, 4, 0.48) 25%, 
-      rgba(8, 6, 4, 0.52) 60%, 
-      rgba(8, 6, 4, 0.88) 100%
+      rgba(10, 7, 5, 0.45) 0%, 
+      rgba(10, 7, 5, 0.25) 30%, 
+      rgba(10, 7, 5, 0.30) 65%, 
+      rgba(10, 7, 5, 0.55) 100%
    );
    z-index: 2;
    pointer-events: none;
+}
+
+.default-image-header > .container {
+   position: relative;
+   z-index: 3;
 }
 
 .section.full-height.default-image-header .container > .row {
@@ -76,10 +81,10 @@
 
 .default-image-header.small-image-bottom .overlay-dark-gradient {   
    background: linear-gradient(180deg, 
-      rgba(8, 6, 4, 0.78) 0%, 
-      rgba(8, 6, 4, 0.48) 25%, 
-      rgba(8, 6, 4, 0.52) 60%, 
-      rgba(8, 6, 4, 0.88) 100%
+      rgba(10, 7, 5, 0.45) 0%, 
+      rgba(10, 7, 5, 0.25) 30%, 
+      rgba(10, 7, 5, 0.30) 65%, 
+      rgba(10, 7, 5, 0.55) 100%
    );
    z-index: 2;
    pointer-events: none;

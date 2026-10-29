@@ -1584,11 +1584,11 @@ main {
    height: 100%;
    z-index: 5 !important;
    background: linear-gradient(180deg, 
-      rgba(8, 6, 4, 0.82) 0%, 
-      rgba(8, 6, 4, 0.58) 20%, 
-      rgba(8, 6, 4, 0.50) 38%, 
-      rgba(8, 6, 4, 0.62) 65%, 
-      rgba(8, 6, 4, 0.90) 100%
+      rgba(10, 7, 5, 0.55) 0%, 
+      rgba(10, 7, 5, 0.30) 25%, 
+      rgba(10, 7, 5, 0.28) 45%, 
+      rgba(10, 7, 5, 0.40) 70%, 
+      rgba(10, 7, 5, 0.65) 100%
    ) !important;
    transform: none;
    opacity: 1 !important;
@@ -2366,6 +2366,11 @@ main {
 .section-stay-single-header {
    overflow: hidden;
    padding: 0;
+}
+
+.section-stay-single-header > .container {
+   position: relative;
+   z-index: 3;
 }
 
 .section-stay-single-header .overlay-dark-gradient {   
