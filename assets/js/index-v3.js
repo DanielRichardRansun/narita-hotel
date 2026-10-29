@@ -27,6 +27,20 @@ CustomEase.create("animation-nav", ".3, 0, .3, 1");
 
 initPageTransitions();
 
+// Ensure fonts are ready before playing entrance animations to prevent FOUT / wrong font flash
+function waitForFonts(callback) {
+   if (document.fonts && document.fonts.ready) {
+      const timeout = new Promise(function(resolve) { setTimeout(resolve, 300); });
+      Promise.race([document.fonts.ready, timeout]).then(function() {
+         callback();
+      }).catch(function() {
+         callback();
+      });
+   } else {
+      callback();
+   }
+}
+
 // Animation - Page Loader
 function initLoaderHome() {
 
@@ -491,7 +505,7 @@ function initPageTransitions() {
             once(data) {
                initSmoothScroll();
                initScript();
-               initLoaderHome();
+               waitForFonts(initLoaderHome);
             },
             leave: handlePageLeave,
             enter: handlePageEnter,
@@ -508,7 +522,7 @@ function initPageTransitions() {
             once(data) {
                initSmoothScroll();
                initScript();
-               initLoader();
+               waitForFonts(initLoader);
             },
             leave: handlePageLeave,
             enter: handlePageEnter,
