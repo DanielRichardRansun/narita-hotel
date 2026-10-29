@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: https://thedamai.com/sitemap.xml
+Sitemap: https://naritahotel.com/sitemap.xml
