@@ -27,20 +27,20 @@ Sistem warna memadukan nuansa bumi (*earth tones*), batu hangat (*stone*), pasir
 :root {
   /* Base RGB Channels */
   --color-dark-rgb: 50, 32, 24;       /* Deep Espresso Brown #322018 */
-  --color-light-rgb: 234, 229, 223;   /* Warm Sand / Warm Linen #EAE5DF */
-  --color-white-rgb: 248, 246, 244;   /* Soft Off-White / Alabaster #F8F6F4 */
+  --color-light-rgb: 250, 248, 245;   /* Bright Warm Alabaster / Ivory White #FAF8F5 */
+  --color-white-rgb: 255, 255, 255;   /* Crisp Pure White #FFFFFF */
   --color-black-rgb: 0, 0, 0;
 
   /* Solid Colors */
   --color-dark: rgba(var(--color-dark-rgb), 1);       /* #322018 - Teks utama & tema gelap */
-  --color-light: rgba(var(--color-light-rgb), 1);     /* #EAE5DF - Background utama website */
-  --color-white: rgba(var(--color-white-rgb), 1);     /* #F8F6F4 - Kontras terang / card light */
+  --color-light: rgba(var(--color-light-rgb), 1);     /* #FAF8F5 - Background utama website (terang mendekati putih dengan sentuhan krem hangat) */
+  --color-white: rgba(var(--color-white-rgb), 1);     /* #FFFFFF - Kontras terang / card light */
   --color-black: rgba(var(--color-black-rgb), 1);
 
   /* Brand Accents */
   --color-primary: #903C02;           /* Sunset Terracotta / Rust Red-Orange */
   --color-secondary: #0A6365;         /* Deep Tropical Teal / Butterfly Green 700 */
-  --color-lightgray: #E0D9D1;         /* Muted Warm Stone / Border Soft */
+  --color-lightgray: #EDE7E0;         /* Muted Warm Stone / Border Soft */
 
   /* Nuance Tone Scale */
   --color-stone-50: var(--color-light);
@@ -77,7 +77,7 @@ Sistem warna memadukan nuansa bumi (*earth tones*), batu hangat (*stone*), pasir
 ```
 
 ### 2.2 Panduan Penggunaan Warna
-1. **Background**: Jangan pernah menggunakan `#FFFFFF` polos. Gunakan `--color-light` (`#EAE5DF`) untuk halaman default, dan `--color-dark` (`#322018`) untuk section berkesan intim/malam.
+1. **Background**: Gunakan `--color-light` (`#FAF8F5`, putih hangat dengan sentuhan krem lembut) untuk halaman default, dan `--color-dark` (`#322018`) untuk section berkesan intim/malam.
 2. **Teks**: Gunakan `--color-dark` dengan opasitas `0.9` (`--color-text`). Hindari warna hitam pekat `#000000` pada teks agar tetap hangat.
 3. **Aksen Interaktif**:
    - Tombol utama / Call-To-Action: Hijau spruce gelap (`--color-butterflygreen-900` / `#00383C`) dengan teks putih dan ikon toska (`#2CA09E`).
@@ -339,7 +339,7 @@ Gunakan kerangka dasar berikut saat memulai proyek baru dengan tema ini:
   <style>
     :root {
       --color-dark: #322018;
-      --color-light: #EAE5DF;
+      --color-light: #FAF8F5;
       --color-white: #F8F6F4;
       --color-primary: #903C02;
       --color-secondary: #0A6365;
@@ -449,7 +449,7 @@ Gunakan kerangka dasar berikut saat memulai proyek baru dengan tema ini:
 
 ## 10. Checklist Kunci Saat Membangun Website Baru Bertema Ini
 
-- [ ] Apakah warna latar belakang menggunakan krem lembut (`#EAE5DF`) dan bukan putih polos?
+- [ ] Apakah warna latar belakang menggunakan putih gading / krem terang lembut (`#FAF8F5`)?
 - [ ] Apakah font heading memakai serif elegan (`Kaftan Serif` / `Cormorant Garamond`) dengan line-height rapat (`1.2`)?
 - [ ] Apakah font body memakai sans-serif berbobot ringan (*light* `300`)?
 - [ ] Apakah ada label `.eyebrow` kapital berspasi longgar di atas judul?

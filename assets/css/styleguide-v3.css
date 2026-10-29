@@ -62,10 +62,10 @@ html.lenis {height: auto;}
    --color-dark-rgb: 50, 32, 24;
    --color-dark: rgba(var(--color-dark-rgb), 1);
 
-   --color-light-rgb: 234, 229, 223;
+   --color-light-rgb: 250, 248, 245;
    --color-light: rgba(var(--color-light-rgb), 1);
 
-   --color-white-rgb: 248, 246, 244;
+   --color-white-rgb: 255, 255, 255;
    --color-white: rgba(var(--color-white-rgb), 1);
 
    --color-black-rgb: 0, 0, 0;
@@ -73,17 +73,17 @@ html.lenis {height: auto;}
 
    --color-primary: #903C02;
    --color-secondary: #0A6365;
-   --color-lightgray: #E0D9D1;
+   --color-lightgray: #EDE7E0;
 
    --color-stone-50: var(--color-light);
    --color-stone-100: var(--color-lightgray);
-   --color-stone-200: #CEC3B6;
+   --color-stone-200: #DFD7CC;
    --color-stone-900: var(--color-dark);
    --color-butterflygreen-500: #2CA09E;
    --color-butterflygreen-700: var(--color-secondary);
    --color-butterflygreen-900: #00383C;
    --color-sunsetorange-800: var(--color-primary);
-   --color-blur: rgba(210, 205, 200, 0.3);
+   --color-blur: rgba(235, 230, 224, 0.45);
 
    --color-border: rgba(var(--color-dark-rgb), 0.15);
    --color-border-light: rgba(var(--color-white-rgb), 0.175);
