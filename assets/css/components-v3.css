@@ -38,7 +38,14 @@
 }
 
 .default-image-header .overlay-dark-gradient {   
-   background: radial-gradient(circle at 50% 60%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.4) 70%);
+   background: linear-gradient(180deg, 
+      rgba(8, 6, 4, 0.78) 0%, 
+      rgba(8, 6, 4, 0.48) 25%, 
+      rgba(8, 6, 4, 0.52) 60%, 
+      rgba(8, 6, 4, 0.88) 100%
+   );
+   z-index: 2;
+   pointer-events: none;
 }
 
 .section.full-height.default-image-header .container > .row {
@@ -68,7 +75,14 @@
 }
 
 .default-image-header.small-image-bottom .overlay-dark-gradient {   
-   background: radial-gradient(circle at 50% 100%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.4) 70%);
+   background: linear-gradient(180deg, 
+      rgba(8, 6, 4, 0.78) 0%, 
+      rgba(8, 6, 4, 0.48) 25%, 
+      rgba(8, 6, 4, 0.52) 60%, 
+      rgba(8, 6, 4, 0.88) 100%
+   );
+   z-index: 2;
+   pointer-events: none;
 }
 
 .default-image-header.small-image-bottom + .section-after-big-image .styled-figure {
