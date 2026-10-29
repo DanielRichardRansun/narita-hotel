@@ -2101,6 +2101,8 @@ main {
 
 .section-after-big-image {
    padding-top: 0;
+   position: relative;
+   z-index: 10;
 }
 
 .section-after-big-image .col-row-image {
@@ -2114,6 +2116,8 @@ main {
 .section-after-big-image .styled-figure {
    width: var(--card-width);
    margin-top: calc((var(--card-width) * 1.333333) * -0.666);
+   position: relative;
+   z-index: 10;
 }
 
 /* ------------------------- Section - Three Images -------------------------------------------------- */

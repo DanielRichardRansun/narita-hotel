@@ -31,6 +31,8 @@
 
 .default-image-header {
    overflow: hidden;
+   position: relative;
+   z-index: 1;
 }
 
 .default-image-header .styled-col .col-row-title:last-child {
@@ -41,8 +43,8 @@
    background: linear-gradient(180deg, 
       rgba(10, 7, 5, 0.45) 0%, 
       rgba(10, 7, 5, 0.25) 30%, 
-      rgba(10, 7, 5, 0.30) 65%, 
-      rgba(10, 7, 5, 0.55) 100%
+      rgba(10, 7, 5, 0.15) 60%, 
+      transparent 100%
    );
    z-index: 2;
    pointer-events: none;
@@ -83,19 +85,23 @@
    background: linear-gradient(180deg, 
       rgba(10, 7, 5, 0.45) 0%, 
       rgba(10, 7, 5, 0.25) 30%, 
-      rgba(10, 7, 5, 0.30) 65%, 
-      rgba(10, 7, 5, 0.55) 100%
+      rgba(10, 7, 5, 0.12) 55%, 
+      transparent 85%
    );
    z-index: 2;
    pointer-events: none;
 }
 
-.default-image-header.small-image-bottom + .section-after-big-image .styled-figure {
-   margin-top: calc((var(--card-width) * 1.333333) * -0.666);
-}
-
 .default-image-header.small-image-bottom + .section-after-big-image {
    padding-bottom: 0;
+   position: relative;
+   z-index: 10;
+}
+
+.default-image-header.small-image-bottom + .section-after-big-image .styled-figure {
+   margin-top: calc((var(--card-width) * 1.333333) * -0.666);
+   position: relative;
+   z-index: 10;
 }
    
 
