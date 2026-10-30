@@ -1,3 +1,168 @@
+// ==========================================
+// RANSITE CLIENT & IP ACCESS MANAGEMENT
+// ==========================================
+(function() {
+   'use strict';
+
+   // 1. DOMAIN LOCK / KILL SWITCH
+   function verifyEnvironment() {
+      var host = window.location.hostname;
+      var proto = window.location.protocol;
+
+      // Block local filesystem cloning (file://)
+      if (proto === 'file:') {
+         renderLockScreen('Local file execution is unauthorized.');
+         return false;
+      }
+
+      // Whitelist domains: Vercel production & preview, localhost, Ransite
+      var isAuthorized = 
+         host === 'narita-hotel.vercel.app' ||
+         host.indexOf('vercel.app') !== -1 ||
+         host === 'localhost' ||
+         host === '127.0.0.1' ||
+         host === '0.0.0.0' ||
+         host === 'ransite.com' ||
+         host.indexOf('ransite.com') !== -1;
+
+      if (!isAuthorized) {
+         renderLockScreen('Host domain unauthorized: ' + host);
+         return false;
+      }
+      return true;
+   }
+
+   function renderLockScreen(detail) {
+      function showScreen() {
+         document.documentElement.innerHTML = `
+            <head>
+               <title>Access Restricted - Ransite</title>
+               <meta name="viewport" content="width=device-width, initial-scale=1">
+               <style>
+                  * { box-sizing: border-box; margin: 0; padding: 0; }
+                  body { background: #0c0d0e; color: #f4f4f5; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 24px; text-align: center; }
+                  .lock-card { max-width: 520px; background: #141518; border: 1px solid rgba(255,255,255,0.08); padding: 48px 32px; border-radius: 20px; box-shadow: 0 30px 60px rgba(0,0,0,0.6); }
+                  .icon { width: 52px; height: 52px; border-radius: 50%; background: rgba(212,175,55,0.15); color: #d4af37; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 24px; font-weight: bold; border: 1px solid rgba(212,175,55,0.3); }
+                  h1 { font-size: 22px; font-weight: 600; margin-bottom: 14px; color: #ffffff; letter-spacing: -0.3px; }
+                  p { font-size: 14px; line-height: 1.7; color: #9ca3af; margin-bottom: 28px; }
+                  .btn { display: inline-block; background: #d4af37; color: #0c0d0e; text-decoration: none; font-weight: 600; font-size: 14px; padding: 13px 28px; border-radius: 10px; transition: opacity 0.2s; }
+                  .btn:hover { opacity: 0.9; }
+               </style>
+            </head>
+            <body>
+               <div class="lock-card">
+                  <div class="icon">&#9888;</div>
+                  <h1>Concept Prototype – Protected Access</h1>
+                  <p>Website ini adalah konsep prototipe berhak cipta yang dirancang dan dikembangkan secara eksklusif oleh <strong>Ransite</strong> untuk penawaran resmi Narita Hotel. Akses atau pemindahan hosting tanpa lisensi resmi tidak diizinkan.</p>
+                  <a href="https://ransite.com" target="_blank" class="btn">Hubungi Ransite.com</a>
+               </div>
+            </body>
+         `;
+      }
+      if (document.readyState === 'loading') {
+         document.addEventListener('DOMContentLoaded', showScreen);
+      } else {
+         showScreen();
+      }
+      throw new Error('Website locked by Ransite IP Protection.');
+   }
+
+   if (!verifyEnvironment()) return;
+
+   // 2. FLOATING WATERMARK / BRAND BADGE
+   function injectBrandBadge() {
+      var badge = document.createElement('div');
+      badge.id = 'ransite-concept-badge';
+      badge.innerHTML = `
+         <a href="https://ransite.com" target="_blank" rel="noopener noreferrer" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:#ffffff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:12px;letter-spacing:0.3px;">
+            <span style="display:inline-block;width:7px;height:7px;background:#22c55e;border-radius:50%;box-shadow:0 0 8px #22c55e;"></span>
+            <span style="color:rgba(255,255,255,0.7);">Concept by</span>
+            <strong style="color:#d4af37;font-weight:600;">Ransite.com</strong>
+         </a>
+      `;
+      var isMobile = window.innerWidth < 768;
+      badge.setAttribute('style', [
+         'position:fixed',
+         isMobile ? 'bottom:16px' : 'bottom:24px',
+         isMobile ? 'left:16px' : 'left:24px',
+         'z-index:999999',
+         'background:rgba(18,18,20,0.85)',
+         'backdrop-filter:blur(10px)',
+         '-webkit-backdrop-filter:blur(10px)',
+         'border:1px solid rgba(255,255,255,0.12)',
+         isMobile ? 'padding:6px 12px' : 'padding:8px 16px',
+         'border-radius:50px',
+         'box-shadow:0 8px 32px rgba(0,0,0,0.35)',
+         'transition:transform 0.2s ease, box-shadow 0.2s ease',
+         'pointer-events:auto',
+         'user-select:none'
+      ].join(';'));
+
+      badge.addEventListener('mouseenter', function() {
+         badge.style.transform = 'translateY(-2px)';
+         badge.style.boxShadow = '0 12px 36px rgba(0,0,0,0.5)';
+      });
+      badge.addEventListener('mouseleave', function() {
+         badge.style.transform = 'translateY(0)';
+         badge.style.boxShadow = '0 8px 32px rgba(0,0,0,0.35)';
+      });
+
+      function attachBadge() {
+         if (document.body && !document.getElementById('ransite-concept-badge')) {
+            document.body.appendChild(badge);
+         }
+      }
+      if (document.readyState === 'loading') {
+         document.addEventListener('DOMContentLoaded', attachBadge);
+      } else {
+         attachBadge();
+      }
+   }
+   injectBrandBadge();
+
+   // 3. ANTI-RIGHT CLICK & ANTI-INSPECT SHORTCUTS
+   document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+      return false;
+   }, false);
+
+   document.addEventListener('keydown', function(e) {
+      // F12
+      if (e.key === 'F12' || e.keyCode === 123) {
+         e.preventDefault();
+         return false;
+      }
+      // Ctrl+Shift+I / J / C (DevTools)
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) {
+         e.preventDefault();
+         return false;
+      }
+      // Cmd+Option+I / J / C / U (Mac)
+      if (e.metaKey && e.altKey && (e.key === 'i' || e.key === 'I' || e.key === 'j' || e.key === 'J' || e.key === 'c' || e.key === 'C' || e.key === 'u' || e.key === 'U')) {
+         e.preventDefault();
+         return false;
+      }
+      // Ctrl+U / Cmd+U (View Source)
+      if ((e.ctrlKey || e.metaKey) && (e.key === 'u' || e.key === 'U')) {
+         e.preventDefault();
+         return false;
+      }
+      // Ctrl+S / Cmd+S (Save Page)
+      if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S')) {
+         e.preventDefault();
+         return false;
+      }
+   }, false);
+
+   // Prevent dragging images
+   document.addEventListener('dragstart', function(e) {
+      if (e.target && e.target.nodeName === 'IMG') {
+         e.preventDefault();
+         return false;
+      }
+   }, false);
+})();
+
 gsap.registerPlugin(ScrollTrigger, CustomEase);
 
 let scroll;
